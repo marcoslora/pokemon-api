@@ -1,4 +1,4 @@
-@charset "UTF-8";li{display:flex;align-items:center;margin-bottom:1rem;font-family:Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif}h1{text-align:center}.pokemon-card{opacity:1;transition:opacity .3s ease-in-out;width:max-content}.pokemon-card:hover{opacity:.5}.card-container{width:200px;top:25vh;left:40vw}/*!
+@charset "UTF-8";li{display:flex;align-items:center;margin-bottom:1rem;font-family:Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif}h1{text-align:center}.pokemon-card{opacity:1;transition:opacity .3s ease-in-out;width:max-content}.pokemon-card:hover{opacity:.5}.card-container{width:max-content;top:25vh;left:40vw}.video-container{width:auto}@media only screen and (max-width: 768px) and (min-width: 320px){body{zoom:.75}.card-container{width:auto;top:25vh;left:50vw}}/*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
  * Copyright 2011-2022 Twitter, Inc.
