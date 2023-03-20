@@ -1,36 +1,44 @@
-import React from "react";
-
-interface CardProps {
-  name: string;
-  image: string;
-  types: string[];
-  abilities: string[];
-}
-
-function CardComponent(props: CardProps) {
-  const { name, image, types, abilities } = props;
-
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.css";
+function CardComponent({
+  showCard,
+  abilities,
+  weight,
+  types,
+  image,
+  name,
+}: any) {
   return (
-    <div>
-      <img src={image} alt={name} />
-      <h2>{name}</h2>
-      <div>
-        <h3>Types:</h3>
-        <ul>
-          {types.map((type, index) => (
-            <li key={index}>{type}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h3>Abilities:</h3>
-        <ul>
-          {abilities.map((ability, index) => (
-            <li key={index}>{ability}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
+    <>
+      {showCard ? (
+        <div
+          className="card card-container d-flex flex-column align-items-center bg-secondary bg-gradient text-white rounded justify-content-center position-fixed p-3"
+          style={{ width: "18rem" }}
+        >
+          <img src={image} alt="pokemon picture" className="card-img-top" />
+          <div className="card-body">
+            <p className="card-text">{name}</p>
+            <p className="card-text">Weight: {weight}</p>
+            {abilities.length > 0 && (
+              <p className="card-text">
+                Abilities:
+                {abilities.map((a: any, i: number) => (
+                  <span key={i}>{a?.ability?.name}</span>
+                ))}
+              </p>
+            )}
+            {types.length > 0 && (
+              <p className="card-text">
+                Types:
+                {types.map((t: any, i: number) => (
+                  <span key={i}>{t?.type?.name}</span>
+                ))}
+              </p>
+            )}
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 }
 

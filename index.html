@@ -3,13 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <script src="https://www.youtube.com/iframe_api"></script>
     <title>Vite + React + TS + Test</title>
   </head>
   <body>
-    <img src="" alt="" />
+    <!-- <audio id="musicplayer" autoplay>
+      <source src="../pokemon-api/src/song/Pokémon Theme Song.mp3" />
+    </audio> -->
     <div id="root"></div>
+    <audio
+      id="audio1"
+      src="../pokemon-api/src/song/Pokémon Theme Song.mp3"
+      autoplay
+    >
+      <p>
+        If you are reading this, it is because your browser does not support the
+        audio element.
+      </p>
+    </audio>
+    <button onclick="playAudio()" type="button" id="pp">Play Audio</button>
+    <button onclick="pauseAudio()" type="button" id="pp2">Pause Audio</button>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      const x = document.getElementById("audio1");
+
+      function playAudio() {
+        x.play();
+      }
+
+      function pauseAudio() {
+        x.pause();
+      }
+    </script>
   </body>
 </html>
