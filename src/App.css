@@ -8,7 +8,9 @@ li {
 h1 {
   text-align: center;
 }
-
+h4 {
+  text-align: center;
+}
 .pokemon-card {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+
 function CardComponent({
   showCard,
   abilities,
@@ -23,7 +24,7 @@ function CardComponent({
               <p className="card-text">
                 Abilities:
                 {abilities.map((a: any, i: number) => (
-                  <span key={i}>{a?.ability?.name}</span>
+                  <span key={i}> {a?.ability?.name}</span>
                 ))}
               </p>
             )}

@@ -6,36 +6,17 @@
 
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <script src="https://www.youtube.com/iframe_api"></script>
-    <title>Vite + React + TS + Test</title>
+    <title>Pokemon Pokedex</title>
   </head>
   <body>
-    <!-- <audio id="musicplayer" autoplay>
-      <source src="../pokemon-api/src/song/Pokémon Theme Song.mp3" />
-    </audio> -->
+    <h1>Pokemones</h1>
+    <h4>151</h4>
     <div id="root"></div>
-    <audio
-      id="audio1"
-      src="../pokemon-api/src/song/Pokémon Theme Song.mp3"
-      autoplay
-    >
-      <p>
-        If you are reading this, it is because your browser does not support the
-        audio element.
-      </p>
-    </audio>
-    <button onclick="playAudio()" type="button" id="pp">Play Audio</button>
-    <button onclick="pauseAudio()" type="button" id="pp2">Pause Audio</button>
+    <iframe
+      id="audio-play"
+      src="https://junlimitmp3.blogspot.com/?v=marcoslora/sofia-webpage/src/song/Pok%C3%A9mon%20Theme%20Song.mp3&dl=0"
+      frameborder="0"
+    ></iframe>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      const x = document.getElementById("audio1");
-
-      function playAudio() {
-        x.play();
-      }
-
-      function pauseAudio() {
-        x.pause();
-      }
-    </script>
   </body>
 </html>

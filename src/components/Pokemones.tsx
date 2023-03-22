@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useSyncExternalStore } from "react";
+import React, { useState, useEffect } from "react";
 import CardComponent from "./CardComponent";
+import "bootstrap/dist/css/bootstrap.css";
+import Search from "./Search";
 // import audio from "../song/Pokémon Theme Song.mp3";
 function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -10,7 +12,7 @@ interface Pokemon {
   url: string;
 }
 
-interface pokemonCard {
+export interface pokemonCard {
   abilities: Object[];
   weight: number;
   types: Object[];
@@ -24,12 +26,27 @@ function Pokemones() {
   const [pokemones, setPokemones] = useState<Pokemon[]>([]);
   const [pokemonCards, setPokemonCards] = useState<pokemonCard[]>([]);
   const [lastFetch, setLastFetch] = useState(0);
+  const [filteredPokemonCards, setFilteredPokemonCards] = useState<
+    pokemonCard[]
+  >([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearch = () => {
+    const filteredCards = pokemonCards.filter((card) =>
+      card.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredPokemonCards(filteredCards);
+  };
 
   const handleClick = (index: number) => {
-    const updatedCards = [...pokemonCards];
-    updatedCards.forEach((c) => (c.showCard = false));
-    updatedCards[index].showCard = true;
-    setPokemonCards(updatedCards);
+    const updatedCards = filteredPokemonCards.map((c, i) => {
+      if (i === index) {
+        return { ...c, showCard: true };
+      } else {
+        return { ...c, showCard: false };
+      }
+    });
+    setFilteredPokemonCards(updatedCards);
   };
 
   const handleNext = () => {
@@ -39,7 +56,7 @@ function Pokemones() {
   useEffect(() => {
     async function fetchData(): Promise<void> {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${lastFetch}`
+        `https://pokeapi.co/api/v2/pokemon?limit=151&offset=${lastFetch}`
       );
       const data = await response.json();
       setPokemones(data.results);
@@ -56,54 +73,48 @@ function Pokemones() {
             types: data.types,
             showCard: false,
             id: data.id,
-            name: capitalize(data.name),
+            name: data.name.charAt(0).toUpperCase() + data.name.slice(1),
           };
         })
       );
       setPokemonCards(cards);
+      setFilteredPokemonCards(cards);
     }
 
     fetchData();
-    console.log(lastFetch);
-    console.log(pokemonCards);
   }, [lastFetch]);
+
+  useEffect(() => {
+    const filteredCards = pokemonCards.filter((card) =>
+      card.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredPokemonCards(filteredCards);
+  }, [searchTerm, pokemonCards]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <h1>Pokemones</h1>
+      <Search
+        pokemones={pokemonCards}
+        setFilteredPokemones={setFilteredPokemonCards}
+      />
       <ul>
-        {pokemones.map((pokemon, index) => {
+        {filteredPokemonCards.map((pokemon, index) => {
           return (
             <div
-              className="pokemon-card"
+              className="pokemon-card d-inline-block p-4"
               key={index}
               onClick={() => handleClick(index)}
             >
-              <img
-                src={pokemonCards[index]?.image}
-                alt="pokemon"
-                width={100}
-                height={100}
-              />
+              <img src={pokemon.image} alt="pokemon" width={100} height={100} />
               <li>
-                {pokemonCards[index]?.id} - {pokemonCards[index]?.name}
+                {pokemon.id} - {pokemon.name}
               </li>
             </div>
           );
         })}
       </ul>
 
-      <div className="d-flex justify-content-center my-4">
-        <button
-          className="btn btn-dark w-25"
-          type="button"
-          onClick={handleNext}
-        >
-          Next
-        </button>
-      </div>
-
-      {pokemonCards.map((c, i) => (
+      {filteredPokemonCards.map((c, i) => (
         <CardComponent
           abilities={c.abilities}
           weight={c.weight}
